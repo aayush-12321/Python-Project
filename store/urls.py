@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path
-from .views.home import Index , store,quickView
+from .views.home import Index , store,quickView,search_results
 from .views.signup import Signup
 from .views.login import Login , logout
 from .views.cart import Cart
@@ -24,6 +24,7 @@ urlpatterns = [
     path('orders', auth_middleware(OrderView.as_view()), name='orders'),
     # path("quickview/1",quickView,name='quickView'),
     path("quickview/<int:myid>",quickView,name='quickView'),
+    path('search/', search_results, name='search_results'),
    
 
     # Login.as_view() because class based view is used login.py
