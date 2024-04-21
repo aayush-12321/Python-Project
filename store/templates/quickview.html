@@ -7,6 +7,32 @@ MobileStore-QuickView
 
 {% endblock %}
 
+{% block style %} 
+  <style>
+	.vertical-table {
+    display: flex;
+    flex-direction: column;
+}
+
+.row {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.label {
+    width: 150px; /* Adjust as needed */
+    font-weight: bold;
+}
+
+.value {
+    flex: 1;
+}
+
+  </style>
+
+
+{% endblock %}
+
 
 {% block content %}
 
@@ -17,7 +43,7 @@ MobileStore-QuickView
     <div class="row">
     <div class="col-md-4">
     <div class="row">
-        <img src="{{product.image.url}}" class="card-img-top" alt="{{product.name}}"  width="222px" height="355px">
+        <img src="{{product.image.url}}" class="card-img-top" alt="{{product.name}}"   height="355px">
         <!-- <img src="/uploads/{{product.image}}" width="222px" height="355px"> -->
 
     </div>
@@ -63,10 +89,48 @@ MobileStore-QuickView
         <p>
             {{product.description}}
         </p>
+		<div class="container">
+			<!-- <div class="border rounded p-4 m-4"> -->
+				<!-- <p class="display-4 pl-4 ml-4">Your Orders</p> -->
+				<hr>
+				<div class="vertical-table">
+					<div class="row">
+						<div class="label">Product Name:</div>
+						<div class="value">{{product.name}}</div>
+					</div>
+					<div class="row">
+						<div class="label">Price:</div>
+						<div class="value">RS. {{product.price}}</div>
+					</div>
+					<div class="row">
+						<div class="label">Ram:</div>
+						<div class="value">{{product.ram}} GB</div>
+					</div>
+					<div class="row">
+						<div class="label">Storage:</div>
+						<div class="value">{{product.storage}} GB</div>
+					</div>
+					<div class="row">
+						<div class="label">Primary Camera:</div>
+						<div class="value">{{product.primary_camera}} MP</div>
+					</div>
+					<div class="row">
+						<div class="label">Connectivity:</div>
+						<div class="value">{{product.connectivity}} G</div>
+					</div>
+					<div class="row">
+						<div class="label">Weight:</div>
+						<div class="value">{{product.weight}} Grams</div>
+					</div>
+				<!-- </div> -->
+			</div>
+		</div>
     </div>
     </div>
 
 </div>
+
+
 
 
 

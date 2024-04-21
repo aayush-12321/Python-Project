@@ -7,8 +7,16 @@ class Product(models.Model):
     # price = models.IntegerField(default=0)
     price = models.IntegerField(null=False)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, default=1)
+    ram=models.IntegerField(default=8)
+    storage=models.IntegerField(default=128)
+    connectivity=models.IntegerField(default=4)
+    weight=models.IntegerField(default=200)
+    primary_camera=models.IntegerField(default=48)
     description = models.CharField(max_length=300, default='' , null=True , blank=True)
     image = models.ImageField(upload_to='uploads/products/')
+
+    def __str__(self):
+        return f'{self.name}'
 
     @staticmethod # it does not require an instance of class to be called
     def get_products_by_id(ids): # it is used in cart.py views

@@ -24,4 +24,4 @@ class Order(models.Model):
         return Order.objects.filter(customer=customer_id).order_by('-date')
 
     def __str__(self):
-        return f"{self.product.name} - {self.customer.first_name}"
+        return f"{self.product.name} - {self.customer.email}"

@@ -1,6 +1,7 @@
 from django.shortcuts import render , redirect , HttpResponseRedirect
 from store.models.product import Product
 from store.models.category import Category
+from store.models.customer import Customer
 from django.views import View
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -53,7 +54,6 @@ def store(request):
         products = Product.get_all_products_by_categoryid(categoryID) # defines in products.py modles
     else:
         products = Product.get_all_products();  #defined in product.py view
-
     data = {}
     data['products'] = products
     data['categories'] = categories
@@ -134,12 +134,22 @@ def search_results(request):
             Q(description__icontains=query) |
             Q(category__name__icontains=query)
         ).distinct()
-        error_message=None
-        return render(request, 'search_results.html', {'products': products,'error_message':error_message,'query':query})
-    else:
-        # products = []
-        error_message="Please make Sure To Enter Relevent Search!"
-        # messages.error(request,"Wrong credentials!!!")
-        # return redirect('homepage')
+        # print(f"product:{products}, {len(products)}")
+        if len(products)==0:
+            error_message="Please make Sure To Enter Relevent Search!"
 
-        return render(request, 'search_results.html', {'error_message':error_message,'query':query})
+            # messages.success(request,"Congratulations! User Registered Successfully.")
+            # redirect('homepage')
+            return render(request, 'search_results.html', {'products': products,'query':query,'error_message':error_message})
+        else:
+            error_message=None
+            return render(request, 'search_results.html', {'products': products,'error_message':error_message,'query':query})
+   
+
+
+def profile(request):
+    # user = request.user
+    customer_id = request.session.get('customer')
+    customer=Customer.get_customer_by_id(customer_id)
+
+    return render(request, 'profile.html', {'user': customer})
